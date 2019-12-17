@@ -24,4 +24,4 @@ class action(models.Model):
     
 
                     
-#test
+class test():
