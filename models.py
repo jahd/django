@@ -27,4 +27,4 @@ class action(models.Model):
 class test():
 
 class search():
-    
+    id = 1
