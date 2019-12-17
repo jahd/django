@@ -25,3 +25,4 @@ class action(models.Model):
 
                     
 class test():
+class jahd():
