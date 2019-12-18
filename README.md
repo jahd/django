@@ -80,19 +80,15 @@ L'utilisateur de l'application devra écrire l'entreprise souhaité dans un inpu
 
 Technologies utilisées pour la création de l'application
 -------------------------------------------------------
-L'application permettant l'interprétation des données a été devellopé avec Python 3.8 et Django 3.0
+L'application permettant l'interprétation des données a été dévellopée avec Python 3.8 et Django 3.0
 Sqlite va nous permettre d'utiliser SQL
 SQL pour faire des requêtes.
 Pour le front : html/css
 
-​
-​
-Accès, partage, données croisées
-================================
-​
-- à remplir
-​
-​
-Etudes statistiques, IA
-=======================
-​
+Difficultés rencontrées
+-----------------------
+Les modèles semblent être correctes mais l'importation des données pose problème et nous ne sommes pas parvenu à résoudre cette étape.
+Nous avons également eu un problème au niveau du temps puisque notre groupe n'a pas pu se déplacer en cours le 1er jour du projet et nous avons eu des informations manquantes (on nous a seulement indiqué les "vues fusionnées", c'est par la suite qu'on a eu les "vues séparées")
+On a essayé de pallier aux autres difficultées mineurs via des tutoriels django/sqlite.
+
+
