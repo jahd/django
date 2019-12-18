@@ -76,11 +76,11 @@ Construction des modèles
 
 La représentation des résultats
 -------------------------------
-L'utilisateur de l'application devra écrire l'entreprise souhaité dans un input prévu à cet effet. L'input va déclencher une requête SQL qui va nous permettre d'afficher les résultat sur la page d'application.
+L'utilisateur de l'application devra inscrire l'entreprise souhaité dans un input prévu à cet effet. L'input va déclencher une requête SQL qui va nous permettre d'afficher les résultat sur la page d'application.
 
 Technologies utilisées pour la création de l'application
 -------------------------------------------------------
-L'application permettant l'interprétation des données a été dévellopée avec Python 3.8 et Django 3.0
+L'application permettant l'interprétation des données a été développée avec Python 3.8 et Django 3.0
 Sqlite va nous permettre d'utiliser SQL
 SQL pour faire des requêtes.
 Pour le front : html/css
