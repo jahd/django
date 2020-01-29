@@ -1,18 +1,40 @@
 from django.db import models
+
+class Action(models.Model):
+
+    id = models.IntegerField(primary_key=True, verbose_name="action_representation_interet_id")
+    
+    def __str__(self):
+        return self.id
+
 class Actionmenee(models.Model):
-    action = models.CharField(null = True,max_length = 144, verbose_name = 'action')
-    action_id = models.IntegerField(primary_key = True , default = 0, verbose_name = 'action_id')
-    action_autre = models.CharField(null = True, max_length = 144, verbose_name = 'action_autre')
+
+    action = models.TextField(verbose_name="action_menee")
+    id = models.IntegerField(primary_key=True, verbose_name="action_representation_interet_id")
+    more = models.TextField(verbose_name="action_menee_autre")
+    
+    def __str__(self):
+        return self.action
+
 
 class Ministeres(models.Model):
-    action_id = models.ForeignKey(Actionmenee,on_delete=models.CASCADE, default = 0, verbose_name = 'action_id')
+    
+    id = models.IntegerField(primary_key=True, verbose_name="action_representation_interet_id")
     responsable_public = models.CharField(null = True, max_length = 150, verbose_name = 'responsable_public')
-    departement_ministeriel = models.CharField(max_length = 150, verbose_name = 'departement_ministriel')
+    departement_ministeriel = models.CharField(max_length = 150, verbose_name = 'departement_ministeriel')
+    
+    def __str__(self):
+        return self.departement_ministeriel
 
-class Benificiares(models.Model):   
-    beneficiaire = models.CharField(max_length = 155, null = True, verbose_name = 'beneficiaire')
-    action_id = models.ForeignKey(Actionmenee,on_delete=models.CASCADE, default = 0, verbose_name = 'action_id')
-    en_propre = models.BooleanField(null = True, blank = True, verbose_name = 'en_propre')
+
+class Benificiares(models.Model):
+    
+    beneficiaire = models.CharField(max_length = 155, null = True, verbose_name = 'beneficiaire_action_menee')
+    id = models.IntegerField(primary_key=True, verbose_name="action_representation_interet_id")
+    en_propre = models.BooleanField(null = True, blank = True, verbose_name = 'action_menee_en_propre')
+
+    def __str__(self):
+        return self.beneficiaire
 
 class GeneralInformation(models.Model):
     id = models.IntegerField(primary_key=True)
