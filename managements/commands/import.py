@@ -41,3 +41,7 @@ def import_csv():
             beneficiaire.action_id = line[1]
             beneficiaire.en_propre = line[2]
             beneficiaire.save()
+
+    def handle (self, *args, **options):
+        
+        import_csv()
