@@ -25,9 +25,9 @@
 	<div class="fenetre">
 		<h1>Application lobby</h1>
 		<div class="container-fenetre">
-			<form method = "post">
+			<form action="{% url 'analytics:get'  %}" method = "post">
+				{% csrf_token %}
 				{{ Entreprise.as_p }}
-
 					<div class="wrap-input1 validate-input" data-validate = "Name is required">
 						<input class="input1" type="text" name="name" placeholder="Entreprise">
 						<span class="shadow-input1"></span>
@@ -47,7 +47,11 @@
 					<span class="contact1-form-title">
 							Détails de l'entreprise
 						</span>
-					<p>Gund on every continent except Australia.</p>
+					<p>
+					{% for choice in args['obtained'] %}
+						<li>{{ choice }}</li>
+					{% endfor %}
+					</p>
 			</div>	
 		</div>
 	</div>
@@ -85,3 +89,4 @@
 
 </body>
 </html>
+
