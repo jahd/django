@@ -1,0 +1,16 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HATVP</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'analytics/main.css' %}">
+</head>
+<body>
+<header class="header">
+	<main role="main" class="container">
+		  {% block content %}{% endblock %}
+	</main>
+</header>
+</body>
+</html>
