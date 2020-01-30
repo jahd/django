@@ -1,0 +1,23 @@
+{% extends "analytics/base.html" %}
+{% block content %}
+<form action="/analytics/search/" method = "get">
+	<h1>HATVP</h1>
+		<div class="form-box">
+			<input class="input1" type="search-field name" name="q" value="{{request.GET.q}}" placeholder="Entreprise">
+		
+		<button type ="submit" class="search-btn">
+				Rechercher
+		</button>
+		</div>
+</form>	
+{% if Beneficiaires %}
+    <ul>
+	<h2>Exemples des entreprises</h2>
+    {% for k in Beneficiaires %}
+        <li><a href="/analytics/{{ k.id }}/">{{ k }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Entreprise available.</p>
+{% endif %}
+{% endblock content %}
