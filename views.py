@@ -1,33 +1,42 @@
-from django.shortcuts import render
-from .forms import HomeForm
+from django.http import HttpResponse
+from django.template import loader
+from django.db.models import Q
+
 from .models import Actionmenee, Ministeres, Benificiares
 
-def home(request):
-    return render(request,'analytics/home.html')
-
-def get(request):
-    research = HomeForm()
-    return render(request,'analytics/home.html',{'Entreprise':research})
-
-def post(request):
-    form = HomeForm(request.post)
-    if form.is_valid():
-        text = form.clean_data['recuperer']
-        id =  searchdata(text)
-        args = {'obtained':getdata(id)}
-    return render(request,'analytics/home.html',args)
-
-def searchdata (name=''):
-    obj = Benificiares.objects.filter(beneficiaire = name).first()
-    id = obj.action_id
-    return id
     
-def getdata (id):
-    obj1 = Actionmenee.objects.filter(action_id = id)
-    str1 = obj1.action
-    str2 = obj1.action_autre
-    obj2 = Ministeres.objects.filter(action_id = id)
-    str3 = obj2.responsable_public
-    str4 = obj2.departement_ministeriel
-    return str1 + str2 + str3 + str4
-   
+def index(request):
+    Beneficiaires = Benificiares.objects.order_by('id')[0:3]
+    template = loader.get_template('analytics/index.html')
+    context = {
+            'Beneficiaires':Beneficiaires
+            }
+    return HttpResponse(template.render(context, request))
+
+def detail(request, id):
+    Beneficiaires = get_object_or_404(Benificiares, pk= id) 
+    dep =', '.join( str(x) for x in Ministeres.objects.filter(id = id))
+    res = ', '.join(str(x.responsable_public) for x in Ministeres.objects.filter(id = id))
+    act = ', '.join(str(x.action) for x in Actionmenee.objects.filter(id = id))
+    pr = ', '.join(str(x.en_propre) for x in Benificiares.objects.filter(id = id))
+    return render(request, 'analytics/detail.html', {'Bene': Beneficiaires, 'obj':dep, 'res':res, 'act':act, 'pr':pr})
+  
+def search (request):
+    template = 'analytics/detail.html'
+    
+    query = request.GET.get('q')
+    
+    results = Benificiares.objects.filter(Q(beneficiaire__icontains=query))
+    
+    id = results[0].id
+    
+    dep =', '.join( str(x) for x in Ministeres.objects.filter(id = id))
+    res = ', '.join(str(x.responsable_public) for x in Ministeres.objects.filter(id = id))
+    act = ', '.join(str(x.action) for x in Actionmenee.objects.filter(id = id))
+    pr = ', '.join(str(x.en_propre) for x in Benificiares.objects.filter(id = id))
+    
+    context = {
+            'Bene':results[0],'obj':dep, 'res':res, 'act':act, 'pr':pr
+            }
+    return render(request, template, context)
+
